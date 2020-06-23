@@ -15,4 +15,3 @@ buildNumber.properties
 **/target/
 .idea
 **/.gitignore
-**/HELP.md
