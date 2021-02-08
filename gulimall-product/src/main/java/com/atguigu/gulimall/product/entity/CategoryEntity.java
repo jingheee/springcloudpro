@@ -24,6 +24,7 @@ public class CategoryEntity implements Serializable {
 	 */
 	@TableId
 	private Long catId;
+//	private Long id;
 	/**
 	 * 分类名称
 	 */

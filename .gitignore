@@ -14,4 +14,9 @@ buildNumber.properties
 **/.mvn
 **/target/
 .idea
+1.idea
 **/.gitignore
+
+**/node_modules
+**/build
+
