@@ -20,7 +20,20 @@
 		<module>renren-fast</module>
 		<module>renren-generator</module>
 		<module>gulimall-common</module>
+		<module>gulimall-cart</module>
+		<module>gulimall-seckill</module>
+		<module>gulimall-gateway</module>
+		<module>gulimall-auth-server</module>
+		<module>mall-test-sso-server</module>
+		<module>mall-test-sso-clientA</module>
+		<module>mall-test-sso-clientB</module>
 	</modules>
 
+<!--	<parent>-->
+<!--		<groupId>org.springframework.boot</groupId>-->
+<!--		<artifactId>spring-boot-starter-parent</artifactId>-->
+<!--		<version>2.3.1.RELEASE</version>-->
+<!--		<relativePath/>-->
+<!--	</parent>-->
 
 </project>

@@ -1,19 +1,17 @@
 package com.atguigu.gulimall.order.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 订单
- * 
- * @author hh
- * @email 55333@qq.com
- * @date 2020-06-24 13:24:09
  */
 @Data
 @TableName("oms_order")
@@ -83,6 +81,7 @@ public class OrderEntity implements Serializable {
 	private Integer sourceType;
 	/**
 	 * 订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】
+	 * OrderStatusEnum
 	 */
 	private Integer status;
 	/**
@@ -190,4 +189,6 @@ public class OrderEntity implements Serializable {
 	 */
 	private Date modifyTime;
 
+	@TableField(exist = false)
+	private List<OrderItemEntity> itemEntities;
 }

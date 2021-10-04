@@ -1,0 +1,6 @@
+ipAddr: 192.168.56.10
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848

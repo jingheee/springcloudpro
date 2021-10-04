@@ -1,15 +1,35 @@
-﻿spring:
+﻿ipAddr: 192.168.56.10
+spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.56.10:3306/gulimall-ums?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${ipAddr}:3306/gulimall_ums?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8333
   application:
+#    name: Surveillance-Gateway
     name: gulimall-member
+  thymeleaf:
+    cache: false
+  session:
+    store-type: redis
+  redis:
+    host: ${ipAddr}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+      #配置项目热部署
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
 
 
 mybatis-plus:

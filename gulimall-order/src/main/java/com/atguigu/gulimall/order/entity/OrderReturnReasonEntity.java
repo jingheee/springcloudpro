@@ -10,9 +10,6 @@ import lombok.Data;
 /**
  * 退货原因
  * 
- * @author hh
- * @email 55333@qq.com
- * @date 2020-06-24 13:24:09
  */
 @Data
 @TableName("oms_order_return_reason")

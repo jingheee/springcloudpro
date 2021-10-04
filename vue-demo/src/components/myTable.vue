@@ -22,6 +22,7 @@ export default {
   },
   components: {},
   computed: {},
+  // 生命周期函数
   beforeMount() {},
   mounted() {},
   methods: {},

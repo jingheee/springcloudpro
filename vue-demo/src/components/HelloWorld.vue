@@ -5,7 +5,7 @@
     <ul>
       <li>
         <a
-          href="https://github.com/1046762075"
+          href="https://baidu.com"
           target="_blank"
         >
           Core Docs
@@ -13,7 +13,7 @@
       </li>
       <li>
         <a
-          href="https://github.com/1046762075"
+          href="https://baidu.com"
           target="_blank"
         >
           Forum
@@ -21,7 +21,7 @@
       </li>
       <li>
         <a
-          href="https://github.com/1046762075"
+          href="https://baidu.com"
           target="_blank"
         >
           Community Chat
@@ -29,7 +29,7 @@
       </li>
       <li>
         <a
-          href="https://github.com/1046762075"
+          href="https://baidu.com"
           target="_blank"
         >
           Twitter
@@ -38,7 +38,7 @@
       <br>
       <li>
         <a
-          href="https://github.com/1046762075"
+          href="https://baidu.com"
           target="_blank"
         >
           Docs for This Template
@@ -49,7 +49,7 @@
     <ul>
       <li>
         <a
-          href="https://github.com/1046762075"
+          href="https://baidu.com"
           target="_blank"
         >
           vue-router
@@ -57,7 +57,7 @@
       </li>
       <li>
         <a
-          href="https://github.com/1046762075"
+          href="https://baidu.com"
           target="_blank"
         >
           vuex
@@ -65,7 +65,7 @@
       </li>
       <li>
         <a
-          href="https://github.com/1046762075"
+          href="https://baidu.com"
           target="_blank"
         >
           vue-loader
@@ -73,7 +73,7 @@
       </li>
       <li>
         <a
-          href="https://github.com/1046762075"
+          href="https://baidu.com"
           target="_blank"
         >
           awesome-vue

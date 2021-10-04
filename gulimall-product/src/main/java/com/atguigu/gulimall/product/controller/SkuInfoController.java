@@ -4,11 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.atguigu.gulimall.product.entity.SkuInfoEntity;
 import com.atguigu.gulimall.product.service.SkuInfoService;
@@ -27,26 +23,34 @@ import com.atguigu.common.utils.R;
 @RestController
 @RequestMapping("product/skuinfo")
 public class SkuInfoController {
+
     @Autowired
     private SkuInfoService skuInfoService;
 
+    @GetMapping("/{skuId}/price")
+    public R getPrice(@PathVariable("skuId") Long skuId){
+
+        SkuInfoEntity byId = skuInfoService.getById(skuId);
+        return R.ok().setData(byId.getPrice().toString());
+    }
+
     /**
-     * 列表
+     * SKU查询
      */
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = skuInfoService.queryPage(params);
+        PageUtils page = skuInfoService.queryPageByCondition(params);
 
         return R.ok().put("page", page);
     }
 
-
     /**
      * 信息
+     * 		库存保存的时候会远程调用这个接口
      */
     @RequestMapping("/info/{skuId}")
     public R info(@PathVariable("skuId") Long skuId){
-		SkuInfoEntity skuInfo = skuInfoService.getById(skuId);
+        SkuInfoEntity skuInfo = skuInfoService.getById(skuId);
 
         return R.ok().put("skuInfo", skuInfo);
     }
@@ -56,7 +60,7 @@ public class SkuInfoController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody SkuInfoEntity skuInfo){
-		skuInfoService.save(skuInfo);
+        skuInfoService.save(skuInfo);
 
         return R.ok();
     }
@@ -66,7 +70,7 @@ public class SkuInfoController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody SkuInfoEntity skuInfo){
-		skuInfoService.updateById(skuInfo);
+        skuInfoService.updateById(skuInfo);
 
         return R.ok();
     }
@@ -75,10 +79,10 @@ public class SkuInfoController {
      * 删除
      */
     @RequestMapping("/delete")
+    //@RequiresPermissions("${moduleNamez}:skuinfo:delete")
     public R delete(@RequestBody Long[] skuIds){
-		skuInfoService.removeByIds(Arrays.asList(skuIds));
+        skuInfoService.removeByIds(Arrays.asList(skuIds));
 
         return R.ok();
     }
-
 }

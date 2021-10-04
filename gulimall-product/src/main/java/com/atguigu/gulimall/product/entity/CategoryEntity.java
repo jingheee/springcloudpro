@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
@@ -43,6 +44,7 @@ public class CategoryEntity implements Serializable {
 	 * 将当前菜单的子分类都保存到里面
 	 * */
 	@TableField(exist =false)
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<CategoryEntity> children;
 	/**
 	 * 层级
