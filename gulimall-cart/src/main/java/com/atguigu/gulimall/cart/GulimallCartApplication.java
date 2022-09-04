@@ -13,8 +13,16 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class GulimallCartApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GulimallCartApplication.class, args);
-	}
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(GulimallCartApplication.class, args);
+    }
 
 }

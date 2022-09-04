@@ -36,6 +36,14 @@ public class AuthorityDemo {
 
     private static final String RESOURCE_NAME = "testABC";
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("========Testing for black list========");
         initBlackRules();

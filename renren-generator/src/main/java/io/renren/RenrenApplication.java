@@ -10,6 +10,14 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 @MapperScan("io.renren.dao")
 public class RenrenApplication {
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(RenrenApplication.class, args);
     }

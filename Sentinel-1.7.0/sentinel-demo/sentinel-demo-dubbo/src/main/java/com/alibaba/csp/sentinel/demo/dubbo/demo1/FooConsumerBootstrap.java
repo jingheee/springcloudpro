@@ -33,6 +33,14 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class FooConsumerBootstrap {
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         AnnotationConfigApplicationContext consumerContext = new AnnotationConfigApplicationContext();
         consumerContext.register(ConsumerConfiguration.class);

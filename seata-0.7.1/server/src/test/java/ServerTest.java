@@ -40,6 +40,14 @@ public class ServerTest {
      *
      * @param args the input arguments
      */
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
 
         RpcServer rpcServer = new RpcServer(workingThreads);

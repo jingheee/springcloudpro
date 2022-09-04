@@ -29,6 +29,14 @@ import com.alibaba.csp.sentinel.init.InitExecutor;
  */
 public class CommandDemo {
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         // Only for demo. You don't have to do this in your application.
         InitExecutor.doInit();

@@ -52,6 +52,14 @@ public class FooConsumerBootstrap {
     private static final ExecutorService pool = Executors.newFixedThreadPool(10,
         new NamedThreadFactory("dubbo-consumer-pool"));
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         initFlowRule();
 

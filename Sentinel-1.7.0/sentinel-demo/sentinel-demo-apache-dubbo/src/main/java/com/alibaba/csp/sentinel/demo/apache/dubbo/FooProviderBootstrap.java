@@ -40,6 +40,14 @@ public class FooProviderBootstrap {
     private static final String INTERFACE_RES_KEY = FooService.class.getName();
     private static final String RES_KEY = INTERFACE_RES_KEY + ":sayHello(java.lang.String)";
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         // Users don't need to manually call this method.
         // Only for eager initialization.

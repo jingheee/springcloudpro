@@ -31,6 +31,14 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class FooProviderBootstrap {
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         // Users don't need to manually call this method.
         InitExecutor.doInit();

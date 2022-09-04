@@ -16,8 +16,16 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 public class RenrenApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RenrenApplication.class, args);
-	}
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(RenrenApplication.class, args);
+    }
 
 }

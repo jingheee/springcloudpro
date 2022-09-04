@@ -47,6 +47,14 @@ public class NacosDataSourceDemo {
     // fill your namespace id,if you want to use namespace. for example: 0f5c7314-4983-4022-ad5a-347de1d1057d,you can get it on nacos's console
     private static final String NACOS_NAMESPACE_ID = "${namespace}";
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         if (isDemoNamespace) {
             loadMyNamespaceRules();

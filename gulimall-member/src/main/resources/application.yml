@@ -1,4 +1,4 @@
-﻿ipAddr: 192.168.56.10
+﻿ipAddr: 192.168.2.6
 spring:
   datasource:
     username: root
@@ -11,7 +11,7 @@ spring:
         server-addr: 127.0.0.1:8848
     sentinel:
       transport:
-        dashboard: localhost:8333
+        dashboard: localhost:8080
   application:
 #    name: Surveillance-Gateway
     name: gulimall-member

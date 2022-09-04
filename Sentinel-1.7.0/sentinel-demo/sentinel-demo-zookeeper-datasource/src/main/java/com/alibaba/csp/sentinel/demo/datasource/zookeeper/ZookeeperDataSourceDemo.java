@@ -16,6 +16,14 @@ import com.alibaba.fastjson.TypeReference;
  */
 public class ZookeeperDataSourceDemo {
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         // 使用zookeeper的场景
         loadRules();

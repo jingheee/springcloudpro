@@ -43,8 +43,16 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @SpringBootApplication
 public class GulimallOrderApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GulimallOrderApplication.class, args);
-	}
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(GulimallOrderApplication.class, args);
+    }
 
 }

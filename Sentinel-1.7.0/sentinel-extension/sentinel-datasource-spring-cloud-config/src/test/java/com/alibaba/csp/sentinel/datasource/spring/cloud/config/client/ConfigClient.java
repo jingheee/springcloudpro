@@ -28,6 +28,14 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan("com.alibaba.csp.sentinel.datasource.spring.cloud.config.test")
 @PropertySource("classpath:config-client-application.properties")
 public class ConfigClient {
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(ConfigClient.class);
     }

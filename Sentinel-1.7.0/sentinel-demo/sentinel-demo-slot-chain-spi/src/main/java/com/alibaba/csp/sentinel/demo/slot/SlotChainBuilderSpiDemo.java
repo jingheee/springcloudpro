@@ -24,6 +24,14 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
  */
 public class SlotChainBuilderSpiDemo {
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         // You will see this in record.log, indicating that the custom slot chain builder is activated:
         // [SlotChainProvider] Global slot chain builder resolved: com.alibaba.csp.sentinel.demo.slot.DemoSlotChainBuilder

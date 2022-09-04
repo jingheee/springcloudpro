@@ -31,6 +31,14 @@ import java.util.List;
  */
 public class EtcdDataSourceDemo {
 
+    static {
+        try {
+            Class.forName("org.burningwave.core.assembler.StaticComponentContainer");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
 
         String rule_key = "sentinel_demo_rule_key";
