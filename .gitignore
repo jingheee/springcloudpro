@@ -17,5 +17,5 @@ buildNumber.properties
 1.idea
 
 **/node_modules
-**/build
+gulimall-admin-vue-app/buildconfig
 
