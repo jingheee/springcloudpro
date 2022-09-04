@@ -1,9 +1,9 @@
 package com.atguigu.gulimall.seckill.controller;
 
+import com.atguigu.common.to.SeckillSkuRedisTo;
 import com.atguigu.common.utils.R;
 import com.atguigu.gulimall.seckill.service.SeckillService;
-import com.atguigu.common.to.SeckillSkuRedisTo;
-import  org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +22,16 @@ public class SeckillController {
 	@Autowired
 	private SeckillService seckillService;
 
+
+	@GetMapping("/tree")
+	@ResponseBody
+	public R tree() {
+		return seckillService.tree();
+	}
+
 	@ResponseBody
 	@GetMapping("/currentSeckillSkus")
-	public R getCurrentSeckillSkus(){
+	public R getCurrentSeckillSkus() {
 		List<SeckillSkuRedisTo> vos = seckillService.getCurrentSeckillSkus();
 		return R.ok().setData(vos);
 	}

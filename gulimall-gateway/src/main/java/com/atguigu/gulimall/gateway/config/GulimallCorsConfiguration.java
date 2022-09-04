@@ -21,7 +21,7 @@ public class GulimallCorsConfiguration {
         // 允许跨域的请求方式
         corsConfiguration.addAllowedMethod("*");
         // 允许跨域的请求来源
-        corsConfiguration.addAllowedOrigin("*");
+        corsConfiguration.addAllowedOriginPattern("*");
         // 是否允许携带cookie跨域
         corsConfiguration.setAllowCredentials(true);
 

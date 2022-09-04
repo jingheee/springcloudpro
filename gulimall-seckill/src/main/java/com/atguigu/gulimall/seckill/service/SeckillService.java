@@ -2,6 +2,7 @@ package com.atguigu.gulimall.seckill.service;
 
 
 import com.atguigu.common.to.SeckillSkuRedisTo;
+import com.atguigu.common.utils.R;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface SeckillService {
 	SeckillSkuRedisTo getSkuSeckillInfo(Long skuId);
 
 	String kill(String killId, String key, Integer num);
+
+	R tree();
 }

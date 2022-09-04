@@ -6,16 +6,16 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.atguigu.common.constant.RabbitInfo;
+import com.atguigu.common.to.SeckillSkuRedisTo;
 import com.atguigu.common.to.mq.SecKillOrderTo;
 import com.atguigu.common.utils.R;
 import com.atguigu.common.vo.MemberRespVo;
+import com.atguigu.common.vo.SkuInfoVo;
 import com.atguigu.gulimall.seckill.feign.CouponFeignService;
 import com.atguigu.gulimall.seckill.feign.ProductFeignService;
 import com.atguigu.gulimall.seckill.interceptor.LoginUserInterceptor;
 import com.atguigu.gulimall.seckill.service.SeckillService;
-import com.atguigu.common.to.SeckillSkuRedisTo;
 import com.atguigu.gulimall.seckill.vo.SeckillSessionsWithSkus;
-import com.atguigu.common.vo.SkuInfoVo;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -130,7 +130,7 @@ public class SeckillServiceImpl implements SeckillService {
 					SeckillSkuRedisTo to = JSON.parseObject(json, SeckillSkuRedisTo.class);
 					// 如果没开始秒杀，就清除随机码
 					long current = new Date().getTime();
-					if(current <= to.getStartTime() || current >= to.getEndTime()){
+					if (current <= to.getStartTime() || current >= to.getEndTime()) {
 						to.setRandomCode(null);
 					}
 					return to;
@@ -140,7 +140,14 @@ public class SeckillServiceImpl implements SeckillService {
 		return null;
 	}
 
-	/** @return 订单号/null */
+	@Override
+	public R tree() {
+		return productFeignService.categoryTree();
+	}
+
+	/**
+	 * @return 订单号/null
+	 */
 	@Override
 	public String kill(String killId, String key, Integer num) {
 
