@@ -9,9 +9,9 @@
     <description>renren-fast</description>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.4.RELEASE</version>
+        <artifactId>gulimall</artifactId>
+        <groupId>com.atguigu.gulimall</groupId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -19,35 +19,35 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <mybatisplus.version>3.3.1</mybatisplus.version>
-        <mysql.version>8.0.17</mysql.version>
+        <mysql.version>8.0.30</mysql.version>
         <mssql.version>4.0</mssql.version>
         <oracle.version>11.2.0.3</oracle.version>
-        <druid.version>1.1.13</druid.version>
+        <druid.version>1.2.11</druid.version>
         <quartz.version>2.3.0</quartz.version>
         <commons.lang.version>2.6</commons.lang.version>
-        <commons.fileupload.version>1.2.2</commons.fileupload.version>
-        <commons.io.version>2.5</commons.io.version>
+        <commons.fileupload.version>1.4</commons.fileupload.version>
+        <commons.io.version>2.11.0</commons.io.version>
         <commons.codec.version>1.10</commons.codec.version>
         <commons.configuration.version>1.10</commons.configuration.version>
-        <shiro.version>1.4.0</shiro.version>
-        <jwt.version>0.7.0</jwt.version>
+        <shiro.version>1.9.1</shiro.version>
+        <jwt.version>0.9.1</jwt.version>
         <kaptcha.version>0.0.9</kaptcha.version>
-        <qiniu.version>7.2.23</qiniu.version>
+        <qiniu.version>7.11.0</qiniu.version>
         <aliyun.oss.version>2.8.3</aliyun.oss.version>
-        <qcloud.cos.version>4.4</qcloud.cos.version>
+        <qcloud.cos.version>5.6.101</qcloud.cos.version>
         <swagger.version>2.7.0</swagger.version>
-        <joda.time.version>2.9.9</joda.time.version>
-        <gson.version>2.8.5</gson.version>
-        <fastjson.version>1.2.72</fastjson.version>
-        <hutool.version>4.1.1</hutool.version>
-        <lombok.version>1.18.4</lombok.version>
+        <joda.time.version>2.11.1</joda.time.version>
+        <gson.version>2.9.0</gson.version>
+        <fastjson.version>2.0.12</fastjson.version>
+        <hutool.version>5.8.5</hutool.version>
+        <!--        <lombok.version>1.18.4</lombok.version>-->
 
         <!--wagon plugin 配置-->
         <service-path>/work/renren</service-path>
         <pack-name>${project.artifactId}-${project.version}.jar</pack-name>
-        <remote-addr>192.168.1.10:22</remote-addr>
+        <remote-addr>192.168.2.6:22</remote-addr>
         <remote-username>root</remote-username>
-        <remote-passwd>123456</remote-passwd>
+        <remote-passwd>root</remote-passwd>
     </properties>
 
     <dependencies>
@@ -90,6 +90,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
+            <version>5.3.22</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -137,6 +138,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>42.5.0</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -146,7 +148,6 @@
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
-            <version>${quartz.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.mchange</groupId>
@@ -172,7 +173,6 @@
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>${commons.codec.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-configuration</groupId>
