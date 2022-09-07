@@ -23,7 +23,7 @@ public class SeckillController {
 	private SeckillService seckillService;
 
 
-	@GetMapping("/tree")
+    @GetMapping("/tree")
 	@ResponseBody
 	public R tree() {
 		return seckillService.tree();

@@ -14,7 +14,7 @@
     <description>每一个微服务公共的的依赖、bean、工具类</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <spring-cloud.version>
             2020.0.6
         </spring-cloud.version>
