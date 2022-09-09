@@ -31,13 +31,15 @@ spring:
       #      key-prefix: CACHE_
       #      是否缓存空值
       cache-null-values: true
-#    cache-names:
+  #    cache-names:
 
   #配置项目热部署
   devtools:
     restart:
       enabled: true
       additional-paths: src/main/java
+  main:
+    allow-circular-references: true
 
 
 mybatis-plus:
@@ -60,5 +62,4 @@ gulimall:
 
 server:
   port: 10002
-
 

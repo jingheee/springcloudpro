@@ -22,6 +22,6 @@ public class SeckillWebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginUserInterceptor).addPathPatterns("/**");
-        registry.addInterceptor(redissonInterceptor).addPathPatterns("/**");
+//        registry.addInterceptor(redissonInterceptor).addPathPatterns("/**");
     }
 }

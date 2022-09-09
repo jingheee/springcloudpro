@@ -10,6 +10,10 @@ spring:
         server-addr: 127.0.0.1:8848
     gateway:
       routes:
+        - id: seckillpath
+          uri: lb://gulimall-seckill
+          predicates:
+            - Path=/seckill/**
         # 测试内容
         - id: test_route
           uri: https://www.baidu.com

@@ -1,6 +1,8 @@
 ipAddr: "192.168.2.6"
 server:
   port: 25000
+  servlet:
+    context-path: /seckill
 
 spring:
   application:
