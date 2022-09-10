@@ -3,9 +3,7 @@ package com.atguigu.gulimall.cart.vo;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.BiFunction;
 
 /**
  * <p>Title: Cart</p>

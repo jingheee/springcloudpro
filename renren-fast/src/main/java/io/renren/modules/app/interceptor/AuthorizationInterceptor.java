@@ -11,8 +11,8 @@ package io.renren.modules.app.interceptor;
 
 import io.jsonwebtoken.Claims;
 import io.renren.common.exception.RRException;
-import io.renren.modules.app.utils.JwtUtils;
 import io.renren.modules.app.annotation.Login;
+import io.renren.modules.app.utils.JwtUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,10 +30,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
+    public static final String USER_KEY = "userId";
     @Autowired
     private JwtUtils jwtUtils;
-
-    public static final String USER_KEY = "userId";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

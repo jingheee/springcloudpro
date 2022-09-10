@@ -40,12 +40,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("sys/oss")
 public class SysOssController {
+    private final static String KEY = ConfigConstant.CLOUD_STORAGE_CONFIG_KEY;
 	@Autowired
 	private SysOssService sysOssService;
     @Autowired
     private SysConfigService sysConfigService;
-
-    private final static String KEY = ConfigConstant.CLOUD_STORAGE_CONFIG_KEY;
 	
 	/**
 	 * 列表

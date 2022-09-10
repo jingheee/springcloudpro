@@ -1,16 +1,15 @@
 package com.atguigu.gulimall.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.atguigu.common.utils.PageUtils;
+import com.atguigu.common.utils.R;
+import com.atguigu.gulimall.ware.entity.WareInfoEntity;
+import com.atguigu.gulimall.ware.service.WareInfoService;
 import com.atguigu.gulimall.ware.vo.FareVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gulimall.ware.entity.WareInfoEntity;
-import com.atguigu.gulimall.ware.service.WareInfoService;
-import com.atguigu.common.utils.PageUtils;
-import com.atguigu.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 
 

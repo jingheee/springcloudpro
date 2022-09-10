@@ -3,9 +3,9 @@ package com.atguigu.gulimall.cart.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.atguigu.common.utils.R;
-import com.atguigu.gulimall.cart.service.CartService;
 import com.atguigu.gulimall.cart.feign.ProductFeignService;
 import com.atguigu.gulimall.cart.interceptor.CartInterceptor;
+import com.atguigu.gulimall.cart.service.CartService;
 import com.atguigu.gulimall.cart.vo.Cart;
 import com.atguigu.gulimall.cart.vo.CartItem;
 import com.atguigu.gulimall.cart.vo.SkuInfoVo;
@@ -32,16 +32,13 @@ import java.util.stream.Collectors;
 @Service
 public class CartServiceImpl implements CartService {
 
+    private final String CART_PREFIX = "ATGUIGU:cart:";
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-
     @Autowired
     private ProductFeignService productFeignService;
-
     @Autowired
     private ThreadPoolExecutor executor;
-
-    private final String CART_PREFIX = "ATGUIGU:cart:";
 
     @Override // CartServiceImpl
     public CartItem addToCart(Long skuId, Integer num) throws ExecutionException, InterruptedException {
