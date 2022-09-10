@@ -1,22 +1,56 @@
 package com.atguigu.gulimall.product;
 
+
+import cn.hutool.core.io.FastByteArrayOutputStream;
+import cn.hutool.poi.excel.BigExcelWriter;
+import cn.hutool.poi.excel.ExcelUtil;
+import com.amazonaws.services.s3.AmazonS3;
+import com.atguigu.common.config.S3Config;
 import com.atguigu.gulimall.product.entity.BrandEntity;
+import com.atguigu.gulimall.product.entity.CategoryEntity;
 import com.atguigu.gulimall.product.service.BrandService;
+import com.atguigu.gulimall.product.service.CategoryService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.LinkedList;
+import java.util.List;
 
 @SpringBootTest
 class GulimallProductApplicationTests {
     @Autowired
     BrandService brandService;
+
+
+    static final String Path = "C:\\Users\\benja\\Documents\\opensource\\gulimallPro\\gulimall-product\\src\\main\\resources\\static\\";
+    @Autowired
+    CategoryService categoryService;
+
+    @Test
+    void excel() throws IOException {
+        BigExcelWriter bigWriter = ExcelUtil.getBigWriter();
+        List<CategoryEntity> list = categoryService.list();
+        for (int i = 0; i < 7; i++) {
+            list.addAll(list);
+        }
+        AmazonS3 client = S3Config.client();
+//        Bucket excel = client.createBucket("excel");
+        bigWriter.write(list);
+        try (FastByteArrayOutputStream fastByteArrayOutputStream = new FastByteArrayOutputStream()) {
+            bigWriter.flush(fastByteArrayOutputStream, true);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(fastByteArrayOutputStream.toByteArray());
+            client.putObject("excel", "spring.xlsx", inputStream, null);
+            System.out.println(inputStream);
+        }
+
+    }
+
 
     @Test
     void contextLoads() {

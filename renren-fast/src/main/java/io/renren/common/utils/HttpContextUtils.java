@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 public class HttpContextUtils {
 
 	public static HttpServletRequest getHttpServletRequest() {
-		return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 	}
 
 	public static String getDomain(){
@@ -25,7 +26,8 @@ public class HttpContextUtils {
 		return url.delete(url.length() - request.getRequestURI().length(), url.length()).toString();
 	}
 
-	public static String getOrigin(){
+
+    public static String getOrigin(){
 		HttpServletRequest request = getHttpServletRequest();
 		return request.getHeader("Origin");
 	}

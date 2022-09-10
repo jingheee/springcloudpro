@@ -48,15 +48,33 @@
         </dependency>
 
         <!--sentinel和actuator用于流量监控和统计-->
-        <dependency><!--流量监控-->
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        <!--        <dependency>&lt;!&ndash;流量监控&ndash;&gt;-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>-->
 
-        </dependency>
+        <!--        </dependency>-->
         <dependency><!--流量统计-->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
 
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.12</version>
         </dependency>
 
         <dependency>
@@ -76,7 +94,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.3.2</version>
+            <version>3.5.2</version>
         </dependency>
 
         <!--简化实体类，用@Data代替getset方法-->
@@ -125,6 +143,11 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+            <version>3.5.2</version>
+        </dependency>
 
         <!--jsr3参数校验器-->
         <dependency>
@@ -138,11 +161,40 @@
         <!--            <version>2.0.1.Final</version>-->
         <!--        </dependency>-->
 
+        <!--        <dependency>-->
+        <!--            <groupId>software.amazon.awssdk</groupId>-->
+        <!--            <artifactId>aws-sdk-java</artifactId>-->
+        <!--            <version>2.17.267</version>-->
+        <!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/software.amazon.awssdk/s3 -->
+        <!--        <dependency>-->
+        <!--            <groupId>software.amazon.awssdk</groupId>-->
+        <!--            <artifactId>s3</artifactId>-->
+        <!--            <version>2.17.270</version>-->
+        <!--        </dependency>-->
+        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/software.amazon.awscdk/s3 &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>software.amazon.awscdk</groupId>-->
+        <!--            <artifactId>s3</artifactId>-->
+        <!--            <version>1.172.0</version>-->
+        <!--        </dependency>-->
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <!--            <scope>test</scope>-->
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.2</version>
         </dependency>
 
         <!--热启动-->

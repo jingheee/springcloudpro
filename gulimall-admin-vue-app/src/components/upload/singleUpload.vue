@@ -1,7 +1,7 @@
 <template> 
   <div>
     <el-upload
-      action="http://gulimall-fermhan.oss-cn-qingdao.aliyuncs.com"
+      action="http://localhost:88/api/thirdparty/oss/upload"
       :data="dataObj"
       list-type="picture"
       :multiple="false" :show-file-list="showFileList"
@@ -19,20 +19,20 @@
   </div>
 </template>
 <script>
-   import {policy} from './policy'
-   import { getUUID } from '@/utils'
+import {policy} from './policy'
+import {getUUID} from '@/utils'
 
-  export default {
-    name: 'singleUpload',
-    props: {
-      value: String
+export default {
+  name: 'singleUpload',
+  props: {
+    value: String
+  },
+  computed: {
+    imageUrl() {
+      return this.value;
     },
-    computed: {
-      imageUrl() {
-        return this.value;
-      },
-      imageName() {
-        if (this.value != null && this.value !== '') {
+    imageName() {
+      if (this.value != null && this.value !== '') {
           return this.value.substr(this.value.lastIndexOf("/") + 1);
         } else {
           return null;

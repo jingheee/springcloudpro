@@ -12,6 +12,9 @@ spring:
       oss:
         endpoint: oss-cn-qingdao.aliyuncs.com
         bucket: gulimall-fermhan
+  servlet:
+    multipart:
+      max-file-size: 114MB
 #      sms:
 #        host: http://dfsns.market.alicloudapi.com
 #        path: /data/send_sms

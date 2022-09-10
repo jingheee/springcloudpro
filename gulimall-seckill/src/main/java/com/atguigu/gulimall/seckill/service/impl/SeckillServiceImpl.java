@@ -1,8 +1,6 @@
 package com.atguigu.gulimall.seckill.service.impl;
 
-import com.alibaba.csp.sentinel.Entry;
-import com.alibaba.csp.sentinel.SphU;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.atguigu.common.to.SeckillSkuRedisTo;
@@ -73,40 +71,40 @@ public class SeckillServiceImpl implements SeckillService {
 	@Override
 	public List<SeckillSkuRedisTo> getCurrentSeckillSkus() {
 
-		// 1.确定当前时间属于那个秒杀场次
-		long time = new Date().getTime();
-		// 定义一段受保护的资源
-		try (Entry entry = SphU.entry("seckillSkus")){
-			Set<String> keys = stringRedisTemplate.keys(SESSION_CACHE_PREFIX + "*");
-			for (String key : keys) {
-				// seckill:sessions:1593993600000_1593995400000
-				String replace = key.replace("seckill:sessions:", "");
-				String[] split = replace.split("_");
-				long start = Long.parseLong(split[0]);
-				long end = Long.parseLong(split[1]);
-				// 符合秒杀时间
-				if(time >= start && time <= end){
-					// 2.获取这个秒杀场次的所有商品信息
-					List<String> range = stringRedisTemplate.opsForList().range(key, 0, 100);
-					BoundHashOperations<String, String, String> hashOps = stringRedisTemplate.boundHashOps(SKUKILL_CACHE_PREFIX);
-					// 获取多个sku的信息
-					List<String> list = hashOps.multiGet(range);
-					if(list != null){
-						return list.stream().map(item -> {
-							SeckillSkuRedisTo redisTo = JSON.parseObject(item, SeckillSkuRedisTo.class);
-//						redisTo.setRandomCode(null);
-							return redisTo;
-						}).collect(Collectors.toList());
-					}
-					// 只能同时参与一个秒杀活动
-					break;
-				}
-			}
-		}catch (BlockException e){
-			log.warn("资源被限流：" + e.getMessage());
-		}
-		return null;
-	}
+        // 1.确定当前时间属于那个秒杀场次
+//		long time = new Date().getTime();
+//		// 定义一段受保护的资源
+//		try (Entry entry = SphU.entry("seckillSkus")){
+//			Set<String> keys = stringRedisTemplate.keys(SESSION_CACHE_PREFIX + "*");
+//			for (String key : keys) {
+//				// seckill:sessions:1593993600000_1593995400000
+//				String replace = key.replace("seckill:sessions:", "");
+//				String[] split = replace.split("_");
+//				long start = Long.parseLong(split[0]);
+//				long end = Long.parseLong(split[1]);
+//				// 符合秒杀时间
+//				if(time >= start && time <= end){
+//					// 2.获取这个秒杀场次的所有商品信息
+//					List<String> range = stringRedisTemplate.opsForList().range(key, 0, 100);
+//					BoundHashOperations<String, String, String> hashOps = stringRedisTemplate.boundHashOps(SKUKILL_CACHE_PREFIX);
+//					// 获取多个sku的信息
+//					List<String> list = hashOps.multiGet(range);
+//					if(list != null){
+//						return list.stream().map(item -> {
+//							SeckillSkuRedisTo redisTo = JSON.parseObject(item, SeckillSkuRedisTo.class);
+////						redisTo.setRandomCode(null);
+//							return redisTo;
+//						}).collect(Collectors.toList());
+//					}
+//					// 只能同时参与一个秒杀活动
+//					break;
+//				}
+//			}
+//		}catch (BlockException e){
+//			log.warn("资源被限流：" + e.getMessage());
+//		}
+        return null;
+    }
 
 	@Override
 	public SeckillSkuRedisTo getSkuSeckillInfo(Long skuId) {
