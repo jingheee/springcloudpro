@@ -14,7 +14,7 @@
 	<description>优惠券</description>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>19</java.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <spring-boot.version>2.7.3</spring-boot.version>
 

@@ -111,4 +111,6 @@ spring:
 
 ## http://localhost:88/api/captcha.jpg   http://localhost:8080/renren-fast/captcha.jpg
 ## http://localhost:88/api/product/category/list/tree http://localhost:10000/product/category/list/tree
-
+#logging:
+#  level:
+#    root: debug

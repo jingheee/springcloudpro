@@ -20,7 +20,6 @@
 </template>
 <script>
 import {policy} from './policy'
-import {getUUID} from '@/utils'
 
 export default {
   name: 'singleUpload',
@@ -80,14 +79,16 @@ export default {
         let _self = this;
         return new Promise((resolve, reject) => {
           policy().then(response => {
-            console.log("响应的数据",response);
-            _self.dataObj.policy = response.data.policy;
-            _self.dataObj.signature = response.data.signature;
-            _self.dataObj.ossaccessKeyId = response.data.accessid;
-            _self.dataObj.key = response.data.dir +getUUID()+'_${filename}';
-            _self.dataObj.dir = response.data.dir;
-            _self.dataObj.host = response.data.host;
-            console.log("响应的数据222。。。",_self.dataObj);
+            console.log("响应的数据", response);
+            // console.log("响应的数据JSON",JSON.parse(response.data));
+            // _self.dataObj.policy = response.data.policy;
+            // _self.dataObj.signature = response.data.signature;
+            // _self.dataObj.ossaccessKeyId = response.data.accessid;
+            // _self.dataObj.key = response.data.dir +getUUID()+'_${filename}';
+            // _self.dataObj.dir = response.data.dir;
+            // _self.dataObj.host = response.data.host;
+
+            console.log("响应的数据222。。。", _self.dataObj);
             resolve(true)
           }).catch(err => {
             reject(false)
@@ -95,10 +96,12 @@ export default {
         })
       },
       handleUploadSuccess(res, file) {
+
         console.log("上传成功...")
         this.showFileList = true;
         this.fileList.pop();
-        this.fileList.push({name: file.name, url: this.dataObj.host + '/' + this.dataObj.key.replace("${filename}",file.name) });
+        console.log(this.dataObj)
+        this.fileList.push({name: file.name, url: 'http://localhost:88/api/thirdparty/oss' + '/' + res.data.key});
         this.emitInput(this.fileList[0].url);
       }
     }
