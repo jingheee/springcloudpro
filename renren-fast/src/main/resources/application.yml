@@ -82,6 +82,6 @@ renren:
     # token有效时长，7天，单位秒
     expire: 604800
     header: token
-logging:
-  level:
-    root: debug
+#logging:
+#  level:
+#    root: debug
