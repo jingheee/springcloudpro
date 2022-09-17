@@ -1,21 +1,24 @@
 server:
   port: 88
-
 spring:
   application:
     name: gulimall-gateway
-    #  cloud:
-    #    nacos:
-    #      discovery:
-    #        server-addr: 127.0.0.1:8848
+
+
+
+
+  ## 前端项目，/api
+  profiles:
+    active: prod
+  cloud:
     gateway:
       routes:
         - id: ruoyipath
-          uri: lb://RuoYi
+          uri: lb://ruoyi
           predicates:
             - Path=/api/ruoyi/**
           filters:
-            -StripPrefix=1
+            - StripPrefix=1
 
         - id: seckillpath
           uri: lb://gulimall-seckill
@@ -112,11 +115,10 @@ spring:
           uri: lb://gulimall-product
           predicates:
             - Host=**.gulimall.com  # item
-
-
-  ## 前端项目，/api
-  profiles:
-    active: prod
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin, RETAIN_FIRST
+#  profiles:
+#    active: prod
 
 ## http://localhost:88/api/captcha.jpg   http://localhost:8080/renren-fast/captcha.jpg
 ## http://localhost:88/api/product/category/list/tree http://localhost:10000/product/category/list/tree
