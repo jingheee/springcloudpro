@@ -4,12 +4,19 @@ server:
 spring:
   application:
     name: gulimall-gateway
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
+    #  cloud:
+    #    nacos:
+    #      discovery:
+    #        server-addr: 127.0.0.1:8848
     gateway:
       routes:
+        - id: ruoyipath
+          uri: lb://RuoYi
+          predicates:
+            - Path=/api/ruoyi/**
+          filters:
+            -StripPrefix=1
+
         - id: seckillpath
           uri: lb://gulimall-seckill
           predicates:
@@ -108,6 +115,8 @@ spring:
 
 
   ## 前端项目，/api
+  profiles:
+    active: prod
 
 ## http://localhost:88/api/captcha.jpg   http://localhost:8080/renren-fast/captcha.jpg
 ## http://localhost:88/api/product/category/list/tree http://localhost:10000/product/category/list/tree

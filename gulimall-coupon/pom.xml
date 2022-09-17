@@ -14,11 +14,11 @@
 	<description>优惠券</description>
 
     <properties>
-        <java.version>19</java.version>
+        <java.version>18</java.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <spring-boot.version>2.7.3</spring-boot.version>
 
-        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
     </properties>
 
 	<dependencies>
@@ -76,7 +76,7 @@
 			<dependency>
 				<groupId>com.alibaba.cloud</groupId>
 				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
-				<version>2021.0.1.0</version>
+                <version>2021.0.4.0</version>
                 <type>pom</type>
 				<scope>import</scope>
 			</dependency>
