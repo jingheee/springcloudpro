@@ -7,16 +7,13 @@ spring:
     password: root
     url: jdbc:mysql://127.0.0.1:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
-  cloud:
-    nacos:
-      discovery:
-        server-addr: nacos-service-gulimall:8848
+
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   thymeleaf:
     cache: false
-#    suffix: .html
-#    prefix: classpath:/templates
+  #    suffix: .html
+  #    prefix: classpath:/templates
   session: # 登录session
     store-type: redis
   redis:
@@ -31,13 +28,17 @@ spring:
       #      key-prefix: CACHE_
       #      是否缓存空值
       cache-null-values: true
-#    cache-names:
+  #    cache-names:
 
   #配置项目热部署
   devtools:
     restart:
       enabled: true
       additional-paths: src/main/java
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 
 
 mybatis-plus:
@@ -60,5 +61,3 @@ gulimall:
 
 server:
   port: 10002
-
-

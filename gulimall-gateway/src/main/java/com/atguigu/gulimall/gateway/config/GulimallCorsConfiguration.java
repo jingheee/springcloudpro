@@ -28,7 +28,8 @@ public class GulimallCorsConfiguration {
                 "http://localhost:8090",
                 "http://ruoyi.com:88",
                 "http://cloud:88",
-                "http://cloud:80"
+                "http://cloud:80",
+                "http://localhost"
         ));
         // 是否允许携带cookie跨域
 
