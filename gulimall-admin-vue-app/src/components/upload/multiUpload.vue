@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-upload
-      action="http://localhost:88/api/thirdparty/oss/upload"
+      action="http://192.168.2.6:88/api/thirdparty/oss/upload"
       :data="dataObj"
       :list-type="listType"
       :file-list="fileList"

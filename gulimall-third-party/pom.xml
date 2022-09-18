@@ -14,7 +14,7 @@
     <description>阿里云存储</description>
 
     <properties>
-        <java.version>18</java.version>
+        <java.version>17</java.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <spring-boot.version>2.7.3</spring-boot.version>
 

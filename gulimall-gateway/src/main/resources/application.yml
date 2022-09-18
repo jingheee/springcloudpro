@@ -9,7 +9,7 @@ spring:
 
   ## 前端项目，/api
   profiles:
-    active: prod
+    active: dev
   cloud:
     gateway:
       routes:
@@ -76,7 +76,7 @@ spring:
           uri: lb://renren-fast
           predicates:
             - Path=/api/**
-          filters: # 比如验证码，http://localhost:88/api/captcha.jpg?uuid=c592925c-af7e-415b-83dc-79c28a87351d  转为
+          filters: # 比如验证码，http://192.168.2.6:88/api/captcha.jpg?uuid=c592925c-af7e-415b-83dc-79c28a87351d  转为
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
 
         - id: gulimall_search_route
@@ -120,8 +120,8 @@ spring:
 #  profiles:
 #    active: prod
 
-## http://localhost:88/api/captcha.jpg   http://localhost:8080/renren-fast/captcha.jpg
-## http://localhost:88/api/product/category/list/tree http://localhost:10000/product/category/list/tree
+## http://192.168.2.6:88/api/captcha.jpg   http://192.168.2.6:8080/renren-fast/captcha.jpg
+## http://192.168.2.6:88/api/product/category/list/tree http://192.168.2.6:10000/product/category/list/tree
 #logging:
 #  level:
 #    root: debug

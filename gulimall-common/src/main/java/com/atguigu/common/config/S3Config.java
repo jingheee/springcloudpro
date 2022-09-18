@@ -23,7 +23,7 @@ public class S3Config {
         clientConfiguration.setSocketTimeout(1145);
         s3 = AmazonS3ClientBuilder
                 .standard()
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:9090", Regions.US_EAST_1.name()))
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://192.168.2.6:9090", Regions.US_EAST_1.name()))
                 .withPathStyleAccessEnabled(true)
                 .withClientConfiguration(clientConfiguration)
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))

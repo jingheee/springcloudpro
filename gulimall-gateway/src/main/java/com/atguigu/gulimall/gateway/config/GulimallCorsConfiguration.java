@@ -24,12 +24,13 @@ public class GulimallCorsConfiguration {
         corsConfiguration.addAllowedMethod("*");
         // 允许跨域的请求来源
 //        corsConfiguration.addAllowedOriginPattern("*");
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://cloud", "http://localhost:8080",
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://cloud", "http://192.168.2.6:8080",
                 "http://localhost:8090",
+                "http://192.168.2.6:8090",
                 "http://ruoyi.com:88",
                 "http://cloud:88",
                 "http://cloud:80",
-                "http://localhost"
+                "http://192.168.2.6"
         ));
         // 是否允许携带cookie跨域
 

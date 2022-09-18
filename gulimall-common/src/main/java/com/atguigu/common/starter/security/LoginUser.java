@@ -18,6 +18,7 @@ package com.atguigu.common.starter.security;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -85,6 +86,13 @@ public class LoginUser implements UserDetails {
      * 用户信息
      */
     private SysUser user;
+
+    private Collection<SimpleGrantedAuthority> authorities;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
 
     public LoginUser() {
     }
@@ -242,8 +250,7 @@ public class LoginUser implements UserDetails {
         this.user = user;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 }

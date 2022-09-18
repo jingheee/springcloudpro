@@ -20,17 +20,17 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:88/api/ware/purchase/received",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "88",
-					"path": [
-						"api",
-						"ware",
-						"purchase",
-						"received"
+                  "raw": "http://192.168.2.6:88/api/ware/purchase/received",
+                  "protocol": "http",
+                  "host": [
+                    "192.168.2.6"
+                  ],
+                  "port": "88",
+                  "path": [
+                    "api",
+                    "ware",
+                    "purchase",
+                    "received"
 					]
 				}
 			},
@@ -51,17 +51,17 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:88/api/ware/purchase/done",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "88",
-					"path": [
-						"api",
-						"ware",
-						"purchase",
-						"done"
+                  "raw": "http://192.168.2.6:88/api/ware/purchase/done",
+                  "protocol": "http",
+                  "host": [
+                    "192.168.2.6"
+                  ],
+                  "port": "88",
+                  "path": [
+                    "api",
+                    "ware",
+                    "purchase",
+                    "done"
 					]
 				}
 			},

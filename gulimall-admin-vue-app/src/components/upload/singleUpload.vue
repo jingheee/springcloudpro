@@ -1,7 +1,7 @@
 <template> 
   <div>
     <el-upload
-      action="http://localhost:88/api/thirdparty/oss/upload"
+      action="http://192.168.2.6:88/api/thirdparty/oss/upload"
       :data="dataObj"
       list-type="picture"
       :multiple="false" :show-file-list="showFileList"
@@ -101,7 +101,7 @@ export default {
         this.showFileList = true;
         this.fileList.pop();
         console.log(this.dataObj)
-        this.fileList.push({name: file.name, url: 'http://localhost:88/api/thirdparty/oss' + '/' + res.data.key});
+        this.fileList.push({name: file.name, url: 'http://192.168.2.6:88/api/thirdparty/oss' + '/' + res.data.key});
         this.emitInput(this.fileList[0].url);
       }
     }

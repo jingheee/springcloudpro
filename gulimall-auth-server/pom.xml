@@ -13,7 +13,7 @@
     <name>gulimall-auth-server</name>
     <description>认证微服务，社交登录OAuth2.0、单点登录</description>
     <properties>
-        <java.version>18</java.version>
+        <java.version>17</java.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <spring-boot.version>2.7.3</spring-boot.version>
 

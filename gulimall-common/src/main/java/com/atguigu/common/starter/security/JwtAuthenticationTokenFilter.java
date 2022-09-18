@@ -22,6 +22,7 @@ import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * token过滤器 验证token有效性
@@ -57,6 +60,10 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
         chain.doFilter(request, response);
+    }
+
+    public Set<SimpleGrantedAuthority> getFromSysUser(LoginUser loginUser) throws IOException {
+        return loginUser.getUser().getRoles().stream().map(SysRole::getRoleName).map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
     }
 
     private LoginUser getLoginUser(HttpServletRequest request) {
