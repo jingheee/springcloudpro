@@ -59,5 +59,9 @@ gulimall:
     max-size: 200
     keep-alive-time: 10  # 10s
 
+
+#  security:
+#    path: /**
 server:
   port: 10002
+

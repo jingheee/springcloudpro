@@ -79,6 +79,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 //                LoginUser user = redisCache.getCacheObject(userKey);
                 return user;
             } catch (Exception e) {
+
             }
         }
         return null;

@@ -28,7 +28,18 @@ spring:
     #    scheduling:
     #      pool:
     #        size: 5
-logging:
-  level:
-    org.springframework.cloud.openfeign: debug
-    org.springframework.cloud.sleuth: debug
+#logging:
+#  level:
+#    org.springframework.cloud.openfeign: debug
+#    org.springframework.cloud.sleuth: debug
+#    feign: debug
+#    okhttp3: debug
+
+feign:
+  okhttp:
+    enabled: true
+  client:
+    config:
+      default:
+        connect-timeout: 50000
+        read-timeout: 200

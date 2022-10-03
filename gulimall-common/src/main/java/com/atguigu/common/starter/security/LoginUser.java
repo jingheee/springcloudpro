@@ -21,8 +21,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 登录用户身份权限
@@ -30,6 +32,7 @@ import java.util.Set;
  * @author ruoyi
  */
 public class LoginUser implements UserDetails {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -87,11 +90,32 @@ public class LoginUser implements UserDetails {
      */
     private SysUser user;
 
-    private Collection<SimpleGrantedAuthority> authorities;
+    private Set<String> grantedAuthorities;
+
+
+    public Set<String> getGrantedAuthorities() {
+        return grantedAuthorities;
+    }
+
+    public void setGrantedAuthorities(Set<String> grantedAuthorities) {
+        this.grantedAuthorities = grantedAuthorities;
+    }
+
+    public void initGrantedAuthorities() {
+        if (user != null) {
+            Set<String> collect = user.getRoles().stream().map(SysRole::getRoleKey).collect(Collectors.toSet());
+            this.grantedAuthorities = collect;
+        }
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        if (grantedAuthorities != null) {
+            return this.grantedAuthorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
+        } else {
+            return null;
+        }
     }
 
     public LoginUser() {
@@ -141,8 +165,13 @@ public class LoginUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return null;
     }
+
+//    @Override
+//    public String getUsername() {
+//        return user.getUserName();
+//    }
 
     /**
      * 账户是否未过期,过期无法验证
@@ -250,7 +279,4 @@ public class LoginUser implements UserDetails {
         this.user = user;
     }
 
-    public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
 }

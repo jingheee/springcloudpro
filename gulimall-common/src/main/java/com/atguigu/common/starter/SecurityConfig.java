@@ -1,21 +1,38 @@
 package com.atguigu.common.starter;
 
 import com.atguigu.common.starter.security.JwtAuthenticationTokenFilter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.util.StringUtils;
+
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableWebSecurity
+@Order(SecurityProperties.BASIC_AUTH_ORDER)
+@Slf4j
+@ConditionalOnProperty(value = "gulimall.security.enable", havingValue = "true", matchIfMissing = true)
+public class SecurityConfig {
 
     /**
      * token认证过滤器
@@ -24,6 +41,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilter() {
         return new JwtAuthenticationTokenFilter();
+    }
+
+    @Autowired
+    private AuthenticationConfiguration authenticationConfiguration;
+    @Value("${gulimall.security.path:}")
+    private String securityPath;
+
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+        AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
+        return authenticationManager;
+
     }
 
     /**
@@ -39,11 +68,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @return
      * @throws Exception
      */
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+//    @Bean
+//    @Override
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
 
     /**
      * anyRequest          |   匹配所有请求路径
@@ -60,11 +89,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * rememberMe          |   允许通过remember-me登录的用户访问
      * authenticated       |   用户登录后可访问
      */
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // 注解标记允许匿名访问的url
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity.authorizeRequests();
+//    @Override
+//    protected void configure(HttpSecurity httpSecurity) throws Exception {
+    // 注解标记允许匿名访问的url
+//        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity.authorizeRequests();
 
+
+//        httpSecurity
+//                // CSRF禁用，因为不使用session
+//                .csrf().disable()
+//                // 认证失败处理类
+//                // 基于token，所以不需要session
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//                // 过滤请求
+//                .authorizeRequests()
+//                // 对于登录login 注册register 验证码captchaImage 允许匿名访问
+//                .antMatchers("/login", "/register", "/captchaImage").permitAll()
+//                // 静态资源，可匿名访问
+//                .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/profile/**").permitAll()
+//                .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**").permitAll()
+//                // 除上面外的所有请求全部需要鉴权认证
+//                .anyRequest().authenticated()
+//                .and()
+//                .headers().frameOptions().disable();
+    // 添加Logout filter
+//        httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
+    // 添加JWT filter
+//        httpSecurity.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    // 添加CORS filter
+//        httpSecurity.addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class);
+//        httpSecurity.addFilterBefore(corsFilter, LogoutFilter.class);
+//    }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity.authorizeRequests();
 
         httpSecurity
                 // CSRF禁用，因为不使用session
@@ -75,7 +133,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 注册register 验证码captchaImage 允许匿名访问
-                .antMatchers("/login", "/register", "/captchaImage").permitAll()
+
+
+                .antMatchers(anonymousList()).permitAll()
                 // 静态资源，可匿名访问
                 .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/profile/**").permitAll()
                 .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**").permitAll()
@@ -83,13 +143,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .headers().frameOptions().disable();
+
         // 添加Logout filter
 //        httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         // 添加JWT filter
         httpSecurity.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        // 添加CORS filter
-//        httpSecurity.addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class);
-//        httpSecurity.addFilterBefore(corsFilter, LogoutFilter.class);
+        return httpSecurity.build();
+    }
+
+    private String[] anonymousList() {
+        List<String> list = new ArrayList<>();
+        list.add("/login");
+        list.add("/register");
+        list.add("/captchaImage");
+        if (StringUtils.hasText(securityPath)) {
+            list.add(securityPath);
+        }
+        String[] anonymousList = list.toArray(String[]::new);
+        return anonymousList;
     }
 
     /**
@@ -98,6 +169,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @PostConstruct
+    void initLog() {
+        log.info("init gulimall-security success");
     }
 
 //    /**

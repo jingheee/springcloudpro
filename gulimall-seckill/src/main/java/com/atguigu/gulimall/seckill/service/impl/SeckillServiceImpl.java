@@ -17,7 +17,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.List;
@@ -129,10 +133,27 @@ public class SeckillServiceImpl implements SeckillService {
 		return null;
 	}
 
-	@Override
+    private static long last = 0;
+
+    @Override
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = -1L))
 	public R tree() {
-		return productFeignService.categoryTree();
-	}
+
+        long l = System.currentTimeMillis();
+        long init = l - last;
+        last = l;
+        log.info("当前执行时间{}", init);
+        log.error("当前执行时间{}", init);
+        log.debug("当前执行时间{}", init);
+        log.warn("当前执行时间{}", init);
+//		R r = productFeignService.categoryTree();
+//		if (r.getCode().equals(500)){
+//			throw new RuntimeException();
+//		}
+        ResponseEntity<String> forEntity = new RestTemplate().getForEntity("http://www.baidu.com/114514", String.class);
+        System.out.println(forEntity);
+        return null;
+    }
 
 	/**
 	 * @return 订单号/null

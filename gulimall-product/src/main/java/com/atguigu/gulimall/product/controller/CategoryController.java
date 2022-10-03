@@ -3,6 +3,7 @@ package com.atguigu.gulimall.product.controller;
 import com.atguigu.common.utils.R;
 import com.atguigu.gulimall.product.entity.CategoryEntity;
 import com.atguigu.gulimall.product.service.CategoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("product/category")
+@Slf4j
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
@@ -33,9 +35,24 @@ public class CategoryController {
      * 查出所有分类 以及子分类，以树形结构组装起来
      */
 
+    private static int ZERO = 0;
+    private static int CNT = 0;
+
     @RequestMapping("/list/tree")
-    @PreAuthorize("hasRole('root')")
-    public R list(){
+    @PreAuthorize("hasAnyAuthority('admin')")
+    public R list() throws InterruptedException {
+        log.info("第{}访问", CNT++);
+//        Thread.sleep(200);
+//        if (ThreadLocalRandom.current().nextBoolean())
+//        {
+//            throw new RuntimeException();
+//        }
+        if (ZERO == 1) {
+            ZERO = 0;
+            throw new RuntimeException();
+        }
+        ZERO++;
+
         List<CategoryEntity> entities = categoryService.listWithTree();
         // 筛选出所有一级分类
 //        List<CategoryEntity> level1Menus = entities.stream().
