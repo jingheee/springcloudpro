@@ -16,9 +16,8 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
-    loadbalancer:
-      health-check:
-        interval: 5s
+
+
 #      routes:
 #        - id: ruoyipath
 #          uri: lb://ruoyi
