@@ -30,7 +30,7 @@
     <description>每一个微服务公共的的依赖、bean、工具类</description>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>19</java.version>
         <spring-cloud.version>
             2021.0.4
         </spring-cloud.version>

@@ -29,7 +29,7 @@
     <name>gulimall-auth-server</name>
     <description>认证微服务，社交登录OAuth2.0、单点登录</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>19</java.version>
 
 
     </properties>

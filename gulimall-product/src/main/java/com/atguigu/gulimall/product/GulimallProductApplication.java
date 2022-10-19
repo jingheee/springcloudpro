@@ -24,7 +24,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 //@EnableRedisHttpSession
 @EnableDiscoveryClient
-@MapperScan("com.atguigu.gulimall.**")
+@MapperScan("com.atguigu.gulimall.product.dao")
 @EnableFeignClients(basePackages = "com.atguigu.gulimall.product.feign")// 扫描远程调用接口
 @SpringBootApplication
 public class GulimallProductApplication {
