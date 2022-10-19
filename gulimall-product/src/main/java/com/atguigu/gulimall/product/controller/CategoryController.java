@@ -17,14 +17,14 @@
 package com.atguigu.gulimall.product.controller;
 
 import com.atguigu.common.utils.R;
+import com.atguigu.gulimall.product.dao.CategoryDao;
 import com.atguigu.gulimall.product.entity.CategoryEntity;
 import com.atguigu.gulimall.product.service.CategoryService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,6 +45,26 @@ import java.util.stream.Collectors;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    CategoryDao categoryDao;
+
+    @PostMapping("/userinfo")
+    public String userinfo() {
+        return """
+                { "$id": "user-info", "username": "法外狂徒", "name": "野兽先辈", "sex": "男", "_isOptionsAPI": true }""";
+    }
+
+    @PostMapping("/list")
+    public R list(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
+        page = page == null ? 1 : page;
+        size = size == null ? 10 : size;
+        PageHelper.startPage(page, size);
+        List<CategoryEntity> categoryEntities = categoryDao.selectList(null);
+        PageInfo<CategoryEntity> res = PageInfo.of(categoryEntities);
+        return R.ok().put("data", res);
+    }
+
 
     /**
      * 查出所有分类 以及子分类，以树形结构组装起来

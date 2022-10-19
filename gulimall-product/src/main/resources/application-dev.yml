@@ -60,8 +60,8 @@ gulimall:
     keep-alive-time: 10  # 10s
 
 
-  security:
-    path: /**
+#  security:
+#    path: /**
 server:
   port: 10002
 
