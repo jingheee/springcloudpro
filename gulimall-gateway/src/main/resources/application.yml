@@ -19,6 +19,18 @@ spring:
           lower-case-service-id: true
 
 
+
+gateway:
+  contextpath: /api
+#      routes:
+#        - id: product
+#          uri: lb://gulimall-product
+#          predicates:
+#            - Path=/api/gulimall-product/**
+#          filters:
+#            - StripPrefix=2
+
+
 #      routes:
 #        - id: ruoyipath
 #          uri: lb://ruoyi
@@ -132,3 +144,4 @@ spring:
 #logging:
 #  level:
 #    root: debug
+#
