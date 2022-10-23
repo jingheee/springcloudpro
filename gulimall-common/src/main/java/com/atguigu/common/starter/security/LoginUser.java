@@ -16,13 +16,17 @@
 
 package com.atguigu.common.starter.security;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson2.annotation.JSONField;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,6 +35,7 @@ import java.util.stream.Collectors;
  *
  * @author ruoyi
  */
+@Data
 public class LoginUser implements UserDetails {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -90,31 +95,14 @@ public class LoginUser implements UserDetails {
      */
     private SysUser user;
 
-    private Set<String> grantedAuthorities;
-
-
-    public Set<String> getGrantedAuthorities() {
-        return grantedAuthorities;
-    }
-
-    public void setGrantedAuthorities(Set<String> grantedAuthorities) {
-        this.grantedAuthorities = grantedAuthorities;
-    }
-
-    public void initGrantedAuthorities() {
-        if (user != null) {
-            Set<String> collect = user.getRoles().stream().map(SysRole::getRoleKey).collect(Collectors.toSet());
-            this.grantedAuthorities = collect;
-        }
-    }
-
+    private List<String> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (grantedAuthorities != null) {
-            return this.grantedAuthorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
+        if (CollectionUtil.isNotEmpty(authorities)) {
+            return this.authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
         } else {
-            return null;
+            return Collections.emptySet();
         }
     }
 

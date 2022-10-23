@@ -20,28 +20,25 @@ import cn.hutool.core.bean.BeanUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * token过滤器 验证token有效性
  *
  * @author ruoyi
  */
-@Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     public static final String TOKEN_PREFIX = "Bearer ";
     @Value("${token.header:Authorization}")
@@ -62,27 +59,17 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
-    public Set<SimpleGrantedAuthority> getFromSysUser(LoginUser loginUser) throws IOException {
-        return loginUser.getUser().getRoles().stream().map(SysRole::getRoleName).map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
-    }
-
     private LoginUser getLoginUser(HttpServletRequest request) {
         // 获取请求携带的令牌
         String token = getToken(request);
-        if (StringUtils.isNotEmpty(token)) {
-            try {
-                Claims claims = parseToken(token);
-                // 解析对应的权限以及用户信息
-                LoginUser user = BeanUtil.toBean(claims, LoginUser.class);
-//                String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
-//                String userKey = getTokenKey(uuid);
-//                LoginUser user = redisCache.getCacheObject(userKey);
-                return user;
-            } catch (Exception e) {
-
-            }
+        try {
+            Claims claims = parseToken(token);
+            // 解析对应的权限以及用户信息
+            LoginUser user = BeanUtil.toBean(claims, LoginUser.class);
+            return user;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
-        return null;
     }
 
     private Authentication getAuthentication() {

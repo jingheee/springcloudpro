@@ -16,6 +16,7 @@
 
 package com.atguigu.common.starter;
 
+import com.atguigu.common.starter.security.DemoFilter;
 import com.atguigu.common.starter.security.JwtAuthenticationTokenFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class SecurityConfig {
      */
 
     @Bean
-    public JwtAuthenticationTokenFilter authenticationTokenFilter() {
+    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
         return new JwtAuthenticationTokenFilter();
     }
 
@@ -136,6 +137,7 @@ public class SecurityConfig {
 //        httpSecurity.addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class);
 //        httpSecurity.addFilterBefore(corsFilter, LogoutFilter.class);
 //    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity.authorizeRequests();
@@ -163,9 +165,15 @@ public class SecurityConfig {
         // 添加Logout filter
 //        httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         // 添加JWT filter
-        httpSecurity.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
+
+    @Bean
+    DemoFilter demoFilter() {
+        return new DemoFilter();
+    }
+
 
     private String[] anonymousList() {
         List<String> list = new ArrayList<>();
