@@ -62,6 +62,8 @@ gulimall:
 
 server:
   port: 10002
+  servlet:
+    context-path: /product
 logging:
   level:
     org:

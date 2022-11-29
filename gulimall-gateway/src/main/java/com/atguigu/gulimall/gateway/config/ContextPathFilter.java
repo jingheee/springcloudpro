@@ -18,7 +18,6 @@ package com.atguigu.gulimall.gateway.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -32,7 +31,7 @@ import reactor.core.publisher.Mono;
  * @Auther: lazyd0g
  * @Date: 2022/10/22
  */
-@Configuration
+//@Configuration
 public class ContextPathFilter {
     private String contextpath;
 
@@ -77,6 +76,9 @@ public class ContextPathFilter {
                     return Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "ContextPath does not match the request"));
                 }
                 String newPath = rawPath.substring(contextpath.length());
+                if (!newPath.startsWith("/")) {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                }
                 ServerHttpRequest newRequest = request.mutate().path(newPath).build();
                 return chain.filter(exchange.mutate().request(newRequest).build());
             } else {

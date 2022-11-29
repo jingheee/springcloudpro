@@ -11,6 +11,12 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+    loadbalancer:
+      health-check:
+        refetch-instances-interval: 10s
+
+      cache:
+        ttl: 3s
   redis:
     host: ${ipAddr}
   session:
@@ -38,8 +44,17 @@ spring:
 feign:
   okhttp:
     enabled: true
+
   client:
     config:
       default:
         connect-timeout: 50000
         read-timeout: 200
+gulimall:
+  security:
+    path: /**
+management:
+  endpoint:
+    nacosdiscovery:
+      cache:
+        time-to-live: 114514s

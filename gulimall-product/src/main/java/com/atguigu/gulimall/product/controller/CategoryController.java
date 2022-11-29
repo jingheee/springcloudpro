@@ -24,6 +24,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -73,6 +74,9 @@ public class CategoryController {
     private static int ZERO = 0;
     private static int CNT = 0;
 
+    @Value("${server.port}")
+    private String port;
+
     @RequestMapping("/list/tree")
 //    @PreAuthorize("hasAnyAuthority('admin')")
     public R list() throws InterruptedException {
@@ -99,7 +103,7 @@ public class CategoryController {
 //                    return (menu1.getSort() == null? 0 : menu1.getSort()) - (menu2.getSort() == null? 0 : menu2.getSort());
 //                })
 //                .collect(Collectors.toList());
-        return R.ok().put("data", entities);
+        return R.ok().put("data", port);
     }
 
     /**

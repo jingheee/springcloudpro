@@ -13,26 +13,26 @@ spring:
     active: dev
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-    loadbalancer:
-      health-check:
-        refetch-instances-interval: 1s
+#      discovery:
+      #        locator:
+      #          enabled: true
+      ##          lower-case-service-id: true
+      #    loadbalancer:
+      #      health-check:
+      #        refetch-instances-interval: 1s
+      routes:
+        - id: product
+          uri: lb://gulimall-product
+          predicates:
+            - Path=/product/**
+#          filters:
+#            - StripPrefix=2
+
 
 
 
 gateway:
   contextpath: /api
-#      routes:
-#        - id: product
-#          uri: lb://gulimall-product
-#          predicates:
-#            - Path=/api/gulimall-product/**
-#          filters:
-#            - StripPrefix=2
-
 
 #      routes:
 #        - id: ruoyipath

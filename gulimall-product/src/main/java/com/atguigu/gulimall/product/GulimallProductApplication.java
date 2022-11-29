@@ -16,11 +16,17 @@
 
 package com.atguigu.gulimall.product;
 
+import com.atguigu.gulimall.product.dao.CategoryDao;
+import com.atguigu.gulimall.product.entity.CategoryEntity;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
 
 //@EnableRedisHttpSession
 @EnableDiscoveryClient
@@ -36,6 +42,16 @@ public class GulimallProductApplication {
         } catch (ClassNotFoundException e) {
 
         }
+    }
+
+    @Autowired
+    private CategoryDao noMybatisDao;
+
+    @PostConstruct
+    void read() {
+        List<CategoryEntity> categoryEntities = noMybatisDao.selectList(null);
+        System.out.println(noMybatisDao);
+
     }
 
     public static void main(String[] args) {
