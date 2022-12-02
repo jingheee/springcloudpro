@@ -1,3 +1,19 @@
+/*
+ *    Copyright [2022] [lazyd0g]
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.atguigu.common.utils;
 
 import org.apache.commons.lang.StringUtils;
@@ -9,23 +25,13 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -283,29 +289,29 @@ public class HttpUtils {
 	}
 	
 	private static void sslClient(HttpClient httpClient) {
-        try {
-            SSLContext ctx = SSLContext.getInstance("TLS");
-            X509TrustManager tm = new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() {
-                    return null;
-                }
-                public void checkClientTrusted(X509Certificate[] xcs, String str) {
-                	
-                }
-                public void checkServerTrusted(X509Certificate[] xcs, String str) {
-                	
-                }
-            };
-            ctx.init(null, new TrustManager[] { tm }, null);
-            SSLSocketFactory ssf = new SSLSocketFactory(ctx);
-            ssf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-            ClientConnectionManager ccm = httpClient.getConnectionManager();
-            SchemeRegistry registry = ccm.getSchemeRegistry();
-            registry.register(new Scheme("https", 443, ssf));
-        } catch (KeyManagementException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchAlgorithmException ex) {
-        	throw new RuntimeException(ex);
-        }
-    }
+//        try {
+//            SSLContext ctx = SSLContext.getInstance("TLS");
+//            X509TrustManager tm = new X509TrustManager() {
+//                public X509Certificate[] getAcceptedIssuers() {
+//                    return null;
+//                }
+//                public void checkClientTrusted(X509Certificate[] xcs, String str) {
+//
+//                }
+//                public void checkServerTrusted(X509Certificate[] xcs, String str) {
+//
+//                }
+//            };
+//            ctx.init(null, new TrustManager[] { tm }, null);
+//            SSLSocketFactory ssf = new SSLSocketFactory(ctx);
+//            ssf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+//            ClientConnectionManager ccm = httpClient.getConnectionManager();
+//            SchemeRegistry registry = ccm.getSchemeRegistry();
+//            registry.register(new Scheme("https", 443, ssf));
+//        } catch (KeyManagementException ex) {
+//            throw new RuntimeException(ex);
+//        } catch (NoSuchAlgorithmException ex) {
+//        	throw new RuntimeException(ex);
+//        }
+	}
 }

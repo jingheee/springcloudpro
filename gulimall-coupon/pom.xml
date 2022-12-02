@@ -30,7 +30,7 @@
 	<description>优惠券</description>
 
     <properties>
-        <java.version>19</java.version>
+        <java.version>17</java.version>
 
 
     </properties>

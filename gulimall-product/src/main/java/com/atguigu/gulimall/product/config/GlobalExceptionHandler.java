@@ -17,12 +17,11 @@
 package com.atguigu.gulimall.product.config;
 
 import com.atguigu.common.utils.R;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 全局异常处理器

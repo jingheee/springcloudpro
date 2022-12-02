@@ -32,7 +32,7 @@
 
     <properties>
         <elasticsearch.version>7.17.6</elasticsearch.version>
-        <java.version>19</java.version>
+        <java.version>17</java.version>
 
 
     </properties>
